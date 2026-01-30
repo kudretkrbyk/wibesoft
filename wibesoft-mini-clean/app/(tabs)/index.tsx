@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { router } from 'expo-router'
 import { useCart } from '../../lib/cart'
 import type { Product } from '../../lib/cart'
 import {
@@ -132,15 +133,16 @@ export default function HomeScreen() {
                     {item.price} ₺
                   </Text>
                   <Pressable
-                    onPress={() => add(item)}
-                    style={{
-                      marginTop: 8,
-                      alignSelf: 'flex-start',
-                      paddingVertical: 8,
-                      paddingHorizontal: 12,
-                      backgroundColor: '#27272a',
-                      borderRadius: 12,
-                    }}
+                    onPress={() => router.push(`/product/${item.id}`)}
+                    style={({ pressed }) => ({
+                      flexDirection: 'row',
+                      gap: 12,
+                      backgroundColor: '#18181b',
+                      padding: 12,
+                      borderRadius: 14,
+                      marginBottom: 10,
+                      opacity: pressed ? 0.85 : 1,
+                    })}
                   >
                     <Text style={{ color: 'white', fontWeight: '600' }}>
                       Add to cart
@@ -160,3 +162,4 @@ export default function HomeScreen() {
     </SafeAreaView>
   )
 }
+ 

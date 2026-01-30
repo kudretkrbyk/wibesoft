@@ -53,6 +53,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     () => ({ items, totalQty, totalPrice, add, removeOne, clear }),
     [items, totalQty, totalPrice],
   )
+  const setQty = (id: number, qty: number) => {
+    setItems((prev) => {
+      if (qty <= 0) return prev.filter((x) => x.id !== id)
+      return prev.map((x) => (x.id === id ? { ...x, qty } : x))
+    })
+  }
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }
